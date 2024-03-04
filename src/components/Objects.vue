@@ -1,23 +1,42 @@
 
 <script setup lang="ts">
-import { defineComponent, ref, Suspense } from 'vue';
-import axios, { all } from 'axios';
+import { ref, watch } from 'vue';
+import axios from 'axios';
 
-const allObjects = ref([]);
+var allObjects : Array<string> = [];
+const choosenObject = ref('');
+const ObjectsInfo = ref(
+    {
+        choosenObject: choosenObject,
+        allObjects: allObjects
+    }
+);
 
 await axios.get('https://rps101.pythonanywhere.com/api/v1/objects/all')
-    .then(response => {
-        allObjects.value = response.data;
-    })
-    .catch(error => {
-        console.log(error);
-    });
+.then(response => {
+    allObjects = response.data;
+    ObjectsInfo.value.allObjects = response.data;
+})
+.catch(error => {
+    console.log(error);
+});
+
+
+const emit = defineEmits();
+
+watch(choosenObject, (newValue) => {
+    emit('update:modelValue', newValue);
+    ObjectsInfo.value.choosenObject = newValue;
+});
+watch(ObjectsInfo, (newValue) => {
+    emit('update:modelValue', newValue);
+},{ deep: true});
 </script>
 <template>
     <div class="objects">
-        <div class="object" v-for="object in allObjects">
+        <button class="object" v-for="object in allObjects" @click="choosenObject = object">
             <p >{{ object }}</p>
-        </div>
+        </button>
     </div>
 </template>
 
