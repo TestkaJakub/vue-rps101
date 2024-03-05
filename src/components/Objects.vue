@@ -58,7 +58,7 @@ function setObject(obj : string) {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 30px;
+    height: 50px;
     width: 100px;
     border: 1px solid black;
     margin: 10px;
