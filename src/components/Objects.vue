@@ -11,6 +11,7 @@ const ObjectsInfo = ref(
         allObjects: allObjects
     }
 );
+const dummy = ref(0);
 
 await axios.get('https://rps101.pythonanywhere.com/api/v1/objects/all')
 .then(response => {
@@ -21,20 +22,23 @@ await axios.get('https://rps101.pythonanywhere.com/api/v1/objects/all')
     console.log(error);
 });
 
-
 const emit = defineEmits();
 
-watch(choosenObject, (newValue) => {
-    emit('update:modelValue', newValue);
-    ObjectsInfo.value.choosenObject = newValue;
+watch(() => [choosenObject.value, dummy.value], (newValue) => {
+    emit('update:modelValue', newValue[0]);
+    ObjectsInfo.value.choosenObject = newValue[0];
 });
-watch(ObjectsInfo, (newValue) => {
-    emit('update:modelValue', newValue);
+watch(() => [ObjectsInfo.value, dummy.value], (newValue) => {
+    emit('update:modelValue', newValue[0]);
 },{ deep: true});
+function setObject(obj : string) {
+    dummy.value++;
+    choosenObject.value = obj;
+}
 </script>
 <template>
     <div class="objects">
-        <button class="object" v-for="object in allObjects" @click="choosenObject = object">
+        <button class="object" v-for="object in allObjects" @click="setObject(object)">
             <p >{{ object }}</p>
         </button>
     </div>
