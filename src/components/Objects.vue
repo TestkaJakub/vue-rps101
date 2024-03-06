@@ -1,14 +1,16 @@
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, Ref } from 'vue';
 import axios from 'axios';
 
 var allObjects : Array<string> = [];
 const choosenObject = ref('');
+const randomObjects: Ref<string[]> = ref([]);
 const ObjectsInfo = ref(
     {
         choosenObject: choosenObject,
-        allObjects: allObjects
+        allObjects: allObjects,
+        randomObjects: randomObjects
     }
 );
 const dummy = ref(0);
@@ -22,25 +24,39 @@ await axios.get('https://rps101.pythonanywhere.com/api/v1/objects/all')
     console.log(error);
 });
 
+async function getRandomObjects(numOfObjects : number) {
+    let randomObjects = [];
+    for(let i = 0; i < numOfObjects; i++) {
+        randomObjects.push(allObjects[Math.floor(Math.random() * allObjects.length)]);
+    }
+    return randomObjects;
+}
+
+randomObjects.value = await getRandomObjects(5);
+
 const emit = defineEmits();
 
-watch(() => [choosenObject.value, dummy.value], (newValue) => {
+ watch(() => [choosenObject.value, dummy.value], async (newValue) => {
     emit('update:modelValue', newValue[0]);
     ObjectsInfo.value.choosenObject = newValue[0];
+    ObjectsInfo.value.randomObjects = randomObjects.value;
+
 });
 watch(() => [ObjectsInfo.value, dummy.value], (newValue) => {
     emit('update:modelValue', newValue[0]);
 },{ deep: true});
 function setObject(obj : string) {
-    dummy.value++;
     choosenObject.value = obj;
 }
 </script>
 <template>
-    <div class="objects">
-        <button class="object" v-for="object in allObjects" @click="setObject(object)">
-            <p >{{ object }}</p>
-        </button>
+    <div>
+        <p>Choose an object</p>
+        <div class="objects">
+            <button class="object" v-for="object in randomObjects" @click="setObject(object)">
+                <p >{{ object }}</p>
+            </button>
+        </div>
     </div>
 </template>
 

@@ -6,9 +6,10 @@ import axios from 'axios';
 
 const ObjectsInfo = ref({
   choosenObject: '',
-  allObjects: []
+  allObjects: [],
+  randomObjects: []
 });
-const outcome = ref({});
+const outcome = ref<{ winner?: string, outcome?: string, loser?: string }>({});
 
 async function matchObjects(obj1 : string, obj2 : string) {
   let apiAdress = 'https://rps101.pythonanywhere.com/api/v1/match?';
@@ -25,7 +26,7 @@ async function matchObjects(obj1 : string, obj2 : string) {
 
 watch(ObjectsInfo, (newValue) => {
   let allObjects = [];
-  if(newValue.allObjects instanceof Array) allObjects = newValue.allObjects;
+  if(newValue.randomObjects instanceof Array) allObjects = newValue.randomObjects;
   else return;
   const randomObject = allObjects[Math.floor(Math.random() * allObjects.length)];
 
@@ -40,7 +41,7 @@ function checkIfOutcomeIsDefined() {
 }
 
 function checkWhoWon() {
-  if(outcome.value.winner == 'None - Draw is the same as None - Draw') return 'It\'s a draw!';
+  if(outcome.value.winner == 'None - Draw') return 'It\'s a draw!';
   else if(outcome.value.winner == ObjectsInfo.value.choosenObject) return 'You won!';
   else return 'You lost!';
 }
@@ -51,10 +52,14 @@ function checkWhoWon() {
     <h2 v-if="checkWhoWon() == 'You won!'" class="won">{{ checkWhoWon() }}</h2>
     <h2 v-else-if="checkWhoWon() == 'You lost!'" class="lost">{{ checkWhoWon() }}</h2>
     <h2 v-else class="draw">{{ checkWhoWon() }}</h2>
-    <h3>{{ outcome.winner }} {{ outcome.outcome }} {{ outcome.loser }}</h3>
+    <h3 v-if="checkWhoWon() != 'It\'s a draw!'">{{ outcome.winner }} {{ outcome.outcome }} {{ outcome.loser }}</h3>
+    <h3 v-else="checkWhoWon() != 'It\'s a draw!'">{{ ObjectsInfo.choosenObject }} {{ outcome.outcome }} {{ ObjectsInfo.choosenObject }}</h3>
+    <div class="button-wrap">
+      <button class="button" @click="outcome = {}">Play Again</button>
+    </div>
   </div>
-  <p>Choose an object</p>
-  <Suspense>
+  
+  <Suspense v-else>
     <template #default>
       <Objects v-model="ObjectsInfo"/>
     </template>
@@ -73,5 +78,24 @@ function checkWhoWon() {
 }
 .draw {
   color: #ffff55;
+}
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 100px;
+  border: 1px solid black;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  color: black;
+}
+.button-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 </style>
