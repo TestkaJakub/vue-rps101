@@ -1,7 +1,0 @@
-RETURN:
-objectsInfo ->
-{
-    allObjects -> Array(strings)
-    randomObjects -> Array(string)
-    choosenObject -> String
-}

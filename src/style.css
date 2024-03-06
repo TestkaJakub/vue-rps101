@@ -55,9 +55,9 @@ button {
   transition: border-color 0.2s, background-color 0.2s, color 0.2s;
 }
 button:hover {
-  color: #ffffff;
+  color: #f0f0f0;
   background-color: #213547;
-  border-color: #ffffff;
+  border-color: #f0f0f0;
 }
 button:focus,
 button:focus-visible {
@@ -68,6 +68,7 @@ button:focus-visible {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   height: 100%;
   width: 100%;
 }
@@ -83,10 +84,52 @@ button:focus-visible {
   text-align: center;
 }
 
+input[type="range"] {
+  width: 30%;
+  height: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  outline: none;
+  appearance: none;
+  border: 1px solid black;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: #646cff;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background-color: #646cff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="range"]::-ms-thumb {
+  width: 20px;
+  height: 20px;
+  background-color: #646cff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover,
+input[type="range"]::-moz-range-thumb:hover,
+input[type="range"]::-ms-thumb:hover {
+  background-color: #535bf2;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: #f0f0f0;
   }
   a:hover {
     color: #747bff;

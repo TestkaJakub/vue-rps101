@@ -2,6 +2,14 @@
 import { ref, watch } from 'vue';
 import axios from 'axios';
 
+const props = defineProps({
+    numOfGestures: {
+        type: Number,
+        required: false,
+        default: 5
+    }
+});
+
 var allGestures : Array<string> = [];
 var randomGestures: Array<string> = [];
 var choosenGesture: string = '';
@@ -36,7 +44,7 @@ function getRandomGestures(numOfGestures : number) {
     return randomGestures;
 }
 
-randomGestures = getRandomGestures(3);
+randomGestures = getRandomGestures(props.numOfGestures);
 
 const emit = defineEmits();
 

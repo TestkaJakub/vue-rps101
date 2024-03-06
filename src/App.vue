@@ -1,9 +1,18 @@
 
 <script setup lang="ts">
 
+/* TO DO:
+* - Add controlls for the game -> Working on it rn
+* - Add info about original game
+* - Add my links
+* - Add readme.adoc
+* - Make repo public 
+*/
+
 import { ref, watch, isProxy, toRaw, Suspense } from 'vue';
 import axios from 'axios';
 import Gestures from './components/Gestures.vue';
+import Controls from './components/Controls.vue';
 
 const gesturesInfo = ref({
   aG: [], // all Gestures
@@ -12,6 +21,10 @@ const gesturesInfo = ref({
 });
 const outcome = ref<{ winner?: string, outcome?: string, loser?: string }>({});
 
+const gesturesEachRound = ref(5);
+if(localStorage.getItem('gesturesEachRound') != null) 
+  gesturesEachRound.value = Number(JSON.parse(localStorage.getItem('gesturesEachRound') as string));
+
 async function matchObjects(gesture1 : string, gesture2 : string) {
   let apiAdress = 'https://rps101.pythonanywhere.com/api/v1/match?';
   apiAdress += 'object_one=' + gesture1 + '&object_two=' + gesture2;
@@ -19,7 +32,6 @@ async function matchObjects(gesture1 : string, gesture2 : string) {
   await axios.get(apiAdress)
   .then(response => {
     outcome.value = response.data;
-    console.log(outcome.value)
   })
   .catch(error => {
     console.log(error);
@@ -66,12 +78,14 @@ function whoWon(){
   </div>
   <Suspense v-else>
     <template #default>
-      <Gestures  v-model="gesturesInfo"></Gestures>
+      <Gestures  v-model="gesturesInfo" :num-of-gestures="+gesturesEachRound"></Gestures>
     </template>
     <template #fallback>
       <p>Loading...</p>
     </template>
   </Suspense>
+  <Controls v-model="gesturesEachRound">
+  </Controls>
 </template>
 
 <style scoped>
@@ -84,4 +98,4 @@ function whoWon(){
 .draw {
   color: #ffff55;
 }
-</style>
+</style>./components/Controls.vue
