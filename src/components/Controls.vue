@@ -19,7 +19,7 @@ watch(gesturesEachRound, (newValue) => {
 <template>
     <div>
         <h2>Controls</h2>
-        <label for="gesturesEachRound"><h3>Number of gestures each round: {{ gesturesEachRound }}</h3></label>
+        <label for="gesturesEachRound"><h3>Number of gestures next round: {{ gesturesEachRound }}</h3></label>
         <input id="gesturesEachRound" type="range" min="2" max="101" v-model="gesturesEachRound" />
     </div>
 </template>

@@ -75,6 +75,8 @@ function whoWon(){
     <div class="button-wrap">
       <button @click="outcome = {}">Play Again</button>
     </div>
+    <Controls v-model="gesturesEachRound">
+    </Controls>
   </div>
   <Suspense v-else>
     <template #default>
@@ -84,8 +86,6 @@ function whoWon(){
       <p>Loading...</p>
     </template>
   </Suspense>
-  <Controls v-model="gesturesEachRound">
-  </Controls>
 </template>
 
 <style scoped>
