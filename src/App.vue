@@ -2,11 +2,11 @@
 <script setup lang="ts">
 
 /* TO DO:
-* - Add controlls for the game -> Working on it rn
 * - Add info about original game
 * - Add my links
 * - Add readme.adoc
 * - Make repo public 
+* - Add darkmode/lightmode for the game
 */
 
 import { ref, watch, isProxy, toRaw, Suspense } from 'vue';
@@ -62,6 +62,11 @@ function whoWon(){
   else return 'You lost!';
 }
 
+function startNewRound(){
+  sessionStorage.removeItem('randomGestures');
+  outcome.value = {};
+}
+
 </script>
 <template>
   <h1>RPS 101</h1>
@@ -73,7 +78,7 @@ function whoWon(){
     <h3 v-if="whoWon() != 'It\'s a draw!'">{{ outcome.winner }} {{ outcome.outcome }} {{ outcome.loser }}</h3>
     <h3 v-else>{{ gesturesInfo.cG }} {{ outcome.outcome }} {{ gesturesInfo.cG }}</h3>
     <div class="button-wrap">
-      <button @click="outcome = {}">Play Again</button>
+      <button @click="startNewRound">Play Again</button>
     </div>
     <Controls v-model="gesturesEachRound">
     </Controls>

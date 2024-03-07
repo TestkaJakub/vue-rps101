@@ -41,10 +41,15 @@ function getRandomGestures(numOfGestures : number) {
     for(let i = 0; i < numOfGestures; i++) {
         randomGestures.push(allGestures[Math.floor(Math.random() * allGestures.length)]);
     }
+    sessionStorage.setItem('randomGestures', JSON.stringify(randomGestures));
     return randomGestures;
 }
 
-randomGestures = getRandomGestures(props.numOfGestures);
+if(sessionStorage.getItem('randomGestures') === null) {
+    randomGestures = getRandomGestures(props.numOfGestures);
+} else {
+    randomGestures = JSON.parse(sessionStorage.getItem('randomGestures') as string);
+}
 
 const emit = defineEmits();
 
