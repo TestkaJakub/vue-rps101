@@ -2,17 +2,17 @@
 <script setup lang="ts">
 
 /* TO DO:
-* - Add info about original game
-* - Add my links
 * - Add readme.adoc
 * - Make repo public 
 * - Add darkmode/lightmode for the game
+* - Change website icon
 */
 
 import { ref, watch, isProxy, toRaw, Suspense } from 'vue';
 import axios from 'axios';
 import Gestures from './components/Gestures.vue';
 import Controls from './components/Controls.vue';
+import Infobox from './components/Infobox.vue';
 
 const gesturesInfo = ref({
   aG: [], // all Gestures
@@ -91,6 +91,8 @@ function startNewRound(){
       <p>Loading...</p>
     </template>
   </Suspense>
+  <Infobox>
+  </Infobox>
 </template>
 
 <style scoped>

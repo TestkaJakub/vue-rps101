@@ -1,0 +1,35 @@
+== RPS 101 by Jakub Testka (project name provisional, subject to change)
+
+A variation of the game paper stone scissors, with 101 possible gestures based on https://rps101.pythonanywhere.com/[rps 101] by David C. Lovelace, in the future I plan to add new gestures to build something greater than a simple copy of rps 101.
+
+== Getting Started
+
+The following instructions will give you a copy of the page in the development environment
+
+== Prerequisites
+
+Requirements for the software and other tools to build, test and push 
+- https://nodejs.org/en/[Node.js (for npm)]
+
+== Installing
+
+A step by step series of examples that tell you how to get a development
+environment running
+
+Clone the repository
+[source, shell]
+----
+git clone https://github.com/TestkaJakub/vue-rps101.git
+----
+Open the terminal and...
+
+- Run your project...
+[source, shell]
+----
+npm run dev
+----
+- ... or build your project
+[source, shell]
+----
+npx vite build
+----
