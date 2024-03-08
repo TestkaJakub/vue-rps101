@@ -2,8 +2,6 @@
 <script setup lang="ts">
 
 /* TO DO:
-* - Add readme.adoc
-* - Make repo public 
 * - Add darkmode/lightmode for the game
 * - Change website icon
 */

@@ -9,6 +9,7 @@ The following instructions will give you a copy of the page in the development e
 == Prerequisites
 
 Requirements for the software and other tools to build, test and push 
+
 - https://nodejs.org/en/[Node.js (for npm)]
 
 == Installing
@@ -28,7 +29,7 @@ Open the terminal and...
 ----
 npm run dev
 ----
-- ... or build your project
+- ... or build it
 [source, shell]
 ----
 npx vite build
