@@ -1,11 +1,6 @@
 
 <script setup lang="ts">
 
-/* TO DO:
-* - Add darkmode/lightmode for the game
-* - Change website icon
-*/
-
 import { ref, watch, isProxy, toRaw, Suspense } from 'vue';
 import axios from 'axios';
 import Gestures from './components/Gestures.vue';
@@ -94,13 +89,5 @@ function startNewRound(){
 </template>
 
 <style scoped>
-.won {
-  color: #55ff55;
-}
-.lost {
-  color: #ff5555;
-}
-.draw {
-  color: #ffff55;
-}
+
 </style>./components/Controls.vue
