@@ -1,118 +1,56 @@
-@media (prefers-color-scheme: dark) {
 :root {
-  background-color: #111111;
-  color: #ffffff;
+  --background-color: #111111;
+  --primary-color: #ffffff;
+  --media-color: #119999;
+  --media-hovered-color: #22cccc;
+  --button-background-color: #000000;
+  --button-hovered-background-color: #cccccc;
+  --won-color: #55ff55;
+  --lost-color: #ff5555;
+  --draw-color: #ffff55;
 }
 
-a:hover {
-  color: #22cccc;
-}
-
-button {
-  border-color: #ffffff;
-  background-color: #000000;
-  color: #ffffff;
-}
-
-button:hover {
-  border-color: #000000;
-  background-color: #cccccc;
-  color: #000000;
-}
-
-input[type="range"] {
-  background-color: #000000;
-  border-color: #ffffff;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  background-color: #119999;
-  border-color: #000000;
-}
-
-input[type="range"]::-moz-range-thumb {
-  background-color: #119999;
-}
-
-input[type="range"]::-ms-thumb {
-  background-color: #119999;
-}
-
-input[type="range"]:hover::-webkit-slider-thumb,
-input[type="range"]:hover::-moz-range-thumb,
-input[type="range"]:hover::-ms-thumb {
-  background-color: #22cccc;
-}
-
-.won {
-  color: #55ff55;
-}
-.lost {
-  color: #ff5555;
-}
-.draw {
-  color: #ffff55;
-}
+:root.light-theme{
+  --background-color: #ffffff;
+  --primary-color: #111111;
+  --media-color: #119999;
+  --media-hovered-color: #005555;
+  --button-background-color: #eeeeee;
+  --button-hovered-background-color: #111111;
+  --won-color: #22cc22;
+  --lost-color: #ff5555;
+  --draw-color: #5555ff;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    background-color: #ffffff;
-    color: #111111;
-  }
-  
-  a:hover {
-    color: #005555;
-  }
-  
-  button {
-    border-color: #111111;
-    background-color: #eeeeee;
-    color: #111111;
+    --background-color: #ffffff;
+    --primary-color: #111111;
+    --media-color: #119999;
+    --media-hovered-color: #005555;
+    --button-background-color: #eeeeee;
+    --button-hovered-background-color: #111111;
+    --won-color: #22cc22;
+    --lost-color: #ff5555;
+    --draw-color: #5555ff;
   }
 
-  button:hover {
-    border-color: #eeeeee;
-    background-color: #111111;
-    color: #eeeeee;
-  }
-
-  input[type="range"] {
-    background-color: #eeeeee;
-    border-color: #000000;
-  }
-  
-  input[type="range"]::-webkit-slider-thumb {
-    background-color: #119999;
-    border-color: black;
-  }
-  
-  input[type="range"]::-moz-range-thumb {
-    background-color: #119999;
-  }
-  
-  input[type="range"]::-ms-thumb {
-    background-color: #119999;
-  }
-  
-  input[type="range"]:hover::-webkit-slider-thumb,
-  input[type="range"]:hover::-moz-range-thumb,
-  input[type="range"]:hover::-ms-thumb {
-    background-color: #005555;
-  }
-
-  .won {
-    color: #22cc22;
-  }
-  .lost {
-    color: #ff5555;
-  }
-  .draw {
-    color: #5555ff;
+  :root.light-theme {
+    --background-color: #111111;
+    --primary-color: #ffffff;
+    --media-color: #22cccc;
+    --media-hovered-color: #119999;
+    --button-background-color: #000000;
+    --button-hovered-background-color: #cccccc;
+    --won-color: #55ff55;
+    --lost-color: #ff5555;
+    --draw-color: #ffff55;
   }
 }
 
 :root {
+  background-color: var(--background-color);
+  color: var(--primary-color);
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -120,14 +58,20 @@ input[type="range"]:hover::-ms-thumb {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 a {
   font-weight: 500;
-  color: #119999;
+  color: var(--media-color);
   text-decoration: inherit;
+  transition: color 0.2s;
 }
 
+a:hover {
+  color: var(--media-hovered-color);
+  transition: color 0.2s;
+}
 
 body {
   margin: 0;
@@ -135,6 +79,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 h1 {
@@ -157,10 +102,21 @@ button {
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
+  border-color: var(--primary-color);
+  background-color: var(--button-background-color);
+  color: var(--primary-color);
   transition: border-color 0.2s, background-color 0.2s, color 0.2s;
 }
+
 button:focus {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+button:hover {
+  border-color: var(--background-color);
+  background-color: var(--button-hovered-background-color);
+  color: var(--background-color);
+  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
 }
 
 .button-wrap {
@@ -191,6 +147,9 @@ input[type="range"] {
   appearance: none;
   border-width: 1px;
   border-style: solid;
+  background-color: var(--button-background-color);
+  border-color: var(--primary-color);
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -201,6 +160,9 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: pointer;
   border-width: 1px;
   border-style: solid;
+  background-color: var(--media-color);
+  border-color: var(--primary-color);
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
 input[type="range"]::-moz-range-thumb {
@@ -208,6 +170,9 @@ input[type="range"]::-moz-range-thumb {
   height: 20px;
   border-radius: 50%;
   cursor: pointer;
+  background-color: var(--media-color);
+  border-color: var(--primary-color);
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
 input[type="range"]::-ms-thumb {
@@ -215,4 +180,22 @@ input[type="range"]::-ms-thumb {
   height: 20px;
   border-radius: 50%;
   cursor: pointer;
+  background-color: var(--media-color);
+  border-color: var(--primary-color);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.won {
+  color: var(--won-color);
+  transition: color 0.2s;
+}
+
+.draw {
+  color: var(--draw-color);
+  transition: color 0.2s;
+}
+
+.lost {
+  color: var(--lost-color);
+  transition: color 0.2s;
 }

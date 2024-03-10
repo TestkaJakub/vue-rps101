@@ -6,6 +6,7 @@ import axios from 'axios';
 import Gestures from './components/Gestures.vue';
 import Controls from './components/Controls.vue';
 import Infobox from './components/Infobox.vue';
+import ThemeButton from './components/ThemeButton.vue';
 
 const gesturesInfo = ref({
   aG: [], // all Gestures
@@ -62,6 +63,7 @@ function startNewRound(){
 
 </script>
 <template>
+  <ThemeButton/>
   <h1>RPS 101</h1>
   <div v-if="isOutcomeDefined()">
     <h2 v-if="whoWon() == 'You won!'" class="won">{{ whoWon() }}</h2>
