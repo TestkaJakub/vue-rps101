@@ -1,4 +1,4 @@
-== RPS 101 by Jakub Testka (project name provisional, subject to change)
+== Rock Paper Scissors + by Jakub Testka
 
 A variation of the game rock paper scissors, with 101 possible gestures based on https://rps101.pythonanywhere.com/[rps 101] by David C. Lovelace, in the future I plan to add new gestures to build something greater than a simple copy of rps 101.
 
