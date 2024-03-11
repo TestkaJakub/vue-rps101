@@ -64,7 +64,7 @@ function startNewRound(){
 </script>
 <template>
   <ThemeButton/>
-  <h1>RPS 101</h1>
+  <img src="./assets/rpsp128.svg" alt="RPS 101 Logo" width="220"/>
   <div v-if="isOutcomeDefined()">
     <h2 v-if="whoWon() == 'You won!'" class="won">{{ whoWon() }}</h2>
     <h2 v-else-if="whoWon() == 'You lost!'" class="lost">{{ whoWon() }}</h2>
