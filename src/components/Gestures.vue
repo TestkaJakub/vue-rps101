@@ -36,12 +36,18 @@ if(localStorage.getItem('allGestures') === null) {
 
 allGestures = JSON.parse(localStorage.getItem('allGestures') as string);
 
-function getRandomGestures(numOfGestures : number) {
-    let randomGestures = [];
-    for(let i = 0; i < numOfGestures; i++) {
-        randomGestures.push(allGestures[Math.floor(Math.random() * allGestures.length)]);
+function getRandomGestures(numOfGestures: number) {
+    let randomGestures: string[] = [];
+    const availableGestures = [...allGestures];
+
+    for (let i = 0; i < numOfGestures; i++) {
+        const randomIndex = Math.floor(Math.random() * availableGestures.length);
+        const gesture = availableGestures.splice(randomIndex, 1)[0];
+        randomGestures.push(gesture);
     }
+
     sessionStorage.setItem('randomGestures', JSON.stringify(randomGestures));
+    console.log(sessionStorage.getItem('randomGestures'))
     return randomGestures;
 }
 
